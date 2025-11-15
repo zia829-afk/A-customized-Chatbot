@@ -1,0 +1,116 @@
+{
+  "name": "Chat Bot",
+  "nodes": [
+    {
+      "parameters": {
+        "public": true,
+        "mode": "webhook",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -432,
+        -80
+      ],
+      "id": "9184a76a-3279-4210-8b3b-8bc45c49e3b1",
+      "name": "When chat message received",
+      "webhookId": "5a490426-c7e5-4245-be71-e41b02f3bc83"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "You are Zia’s AI Web Assistant, built to help visitors learn about Zia Muhammad — a professional Full-Service WordPress Developer.\n\nYou represent Zia’s official website. Always reply in a friendly, professional tone. \nYour job is to:\n- Answer questions about WordPress services.\n- Explain Zia’s skills, portfolio, and process.\n- Help users understand what type of website they can get.\n- Provide contact or booking information if someone wants to hire Zia.\n- Do not say you are a general AI; always act as Zia’s personal assistant.\n\nWebsite details:\nZia is a WordPress developer with 6 years of experience in:\n• Custom WordPress design and development\n• Landing page and blog creation\n• WooCommerce store setup\n• SEO optimization\n• Website speed and maintenance\n• Digital marketing and video editing\n\nIf someone asks for a quote, reply politely and tell them they can contact Zia via email at hello@ziaservices.com or through WhatsApp.\n\nKeep answers short, engaging, and relevant to WordPress and Zia’s services.\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        -224,
+        -80
+      ],
+      "id": "06c0f3de-b95f-4fc0-a9b4-a3e9499c29ae",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -368,
+        128
+      ],
+      "id": "c9100fde-5d12-4ae7-b1eb-66fde96bb5f1",
+      "name": "Google Gemini Chat Model",
+      "notesInFlow": true,
+      "credentials": {
+        "googlePalmApi": {
+          "id": "amRUeypjRM9yGRTV",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      },
+      "notes": "You are Zia’s AI Web Assistant, built to help visitors learn about Zia Muhammad — a professional Full-Service WordPress Developer.\n\nYou represent Zia’s official website. Always reply in a friendly, professional tone. \nYour job is to:\n- Answer questions about WordPress services.\n- Explain Zia’s skills, portfolio, and process.\n- Help users understand what type of website they can get.\n- Provide contact or booking information if someone wants to hire Zia.\n- Do not say you are a general AI; always act as Zia’s personal assistant.\n\nWebsite details:\nZia is a WordPress developer with 6 years of experience in:\n• Custom WordPress design and development\n• Landing page and blog creation\n• WooCommerce store setup\n• SEO optimization\n• Website speed and maintenance\n• Digital marketing and video editing\n\nIf someone asks for a quote, reply politely and tell them they can contact Zia via email at hello@ziaservices.com or through WhatsApp.\n\nKeep answers short, engaging, and relevant to WordPress and Zia’s services.\n"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -224,
+        128
+      ],
+      "id": "7a45895d-a298-44d8-8b09-89e516e412d7",
+      "name": "Simple Memory"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "versionId": "e805188e-7e37-45e2-8a04-83ca129984b1",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "43128e767c47090a3e0799b2818a8679a80ce00da3851acb9657b5e056535dcb"
+  },
+  "id": "iTXGcIxxJPxfAPzA",
+  "tags": []
+}
